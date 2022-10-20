@@ -20,6 +20,7 @@ public class Doctor extends AbstractUser {
         this.sex = sex;
     }
 
+
     public String getSpecialization() {
         return specialization;
     }
