@@ -8,6 +8,7 @@ import ru.urfu.OnlineAppointment.models.Doctor;
 import ru.urfu.OnlineAppointment.models.Patient;
 import ru.urfu.OnlineAppointment.services.DoctorService;
 import ru.urfu.OnlineAppointment.services.PatientService;
+import ru.urfu.OnlineAppointment.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,10 @@ import java.util.List;
 @Controller
 public class EntityController {
     private final List<DoctorService> doctorServices;
-    private final List<PatientService> patientServices;
+    private final List<UserService> patientServices;
 
     @Autowired
-    public EntityController(List<DoctorService> doctorServices, List<PatientService> patientServices) {
+    public EntityController(List<DoctorService> doctorServices, List<UserService> patientServices) {
         this.doctorServices = doctorServices;
         this.patientServices = patientServices;
     }

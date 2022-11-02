@@ -18,24 +18,21 @@ public class DoctorService {
         this.doctorRepositories = doctorRepositories;
     }
 
-    public List<Doctor> getDoctors()
-    {
+    public List<Doctor> getDoctors() {
         List<Doctor> result = new ArrayList<>();
         doctorRepositories.findAll().forEach(result::add);
         return result;
     }
 
-    public Doctor getDoctorById(Long id)
-    {
+    public Doctor getDoctorById(Long id) {
         return doctorRepositories.findById(id).get();
     }
 
     public void saveDoctor(String name,
-                             String specialization,
-                             String sex,
-                             int seniority,
-                             int age)
-    {
+                           String specialization,
+                           String sex,
+                           int seniority,
+                           int age) {
         Doctor doctor = new Doctor(name, specialization, sex, seniority, age);
         doctorRepositories.save(doctor);
     }

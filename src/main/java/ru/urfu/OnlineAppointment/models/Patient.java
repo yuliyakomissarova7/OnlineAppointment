@@ -3,8 +3,9 @@ package ru.urfu.OnlineAppointment.models;
 import javax.persistence.Entity;
 
 @Entity
-public class Patient extends AbstractUser{
+public class Patient extends AbstractUser {
     private final int healthInsurance;
+
     public Patient(String name,
                    String sex,
                    int healthInsurance,

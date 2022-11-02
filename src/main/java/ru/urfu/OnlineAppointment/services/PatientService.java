@@ -15,23 +15,20 @@ public class PatientService {
         this.patientRepositories = patientRepositories;
     }
 
-    public List<Patient> getPatient()
-    {
+    public List<Patient> getPatient() {
         List<Patient> result = new ArrayList<>();
         patientRepositories.findAll().forEach(result::add);
         return result;
     }
 
-    public Patient getPatientById(Long id)
-    {
+    public Patient getPatientById(Long id) {
         return patientRepositories.findById(id).get();
     }
 
     public void savePatient(String name,
                             String sex,
                             int healthInsurance,
-                            int age)
-    {
+                            int age) {
         Patient patient = new Patient(name, sex, healthInsurance, age);
         patientRepositories.save(patient);
     }
