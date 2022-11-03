@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на прием</title>
+    <link rel="stylesheet" th:href="@{/css/MainPage.css}" type="text/css" />
+</head>
+<body>
+    <!-- Модальное Окно  -->
+    <div id="overlay">
+        <div class="popup">
+            <h2>Рады Вас видеть!</h2>
+            <h3>
+                Для продолжения записи к нашим врачам, выберите филиал:
+            </h3>
+            <div id="select">
+                <select required>
+                    <option>ул.Первая, д.75</option>
+                    <option>ул.Вторая, д.3</option>
+                    <option>ул.Третья, д.158</option>
+                </select>
+            </div>
+
+            <div class="pl-left">
+
+            </div>
+            <div class="pl-right">
+
+            </div>
+            <button class="choice" title="Выбрать" onclick="document.getElementById('overlay').style.display='none';">Выбрать</button>
+            <!button class="close" title="Закрыть" onclick="document.getElementById('overlay').style.display='none';"><!/button>
+        </div>
+    </div>
+
+    <!-- Сайд бар  -->
+    <div class="sidebar">
+        <p id="set">Сеть клиник</p>
+        <h1 id="name">"Здоровье"</h1>
+        <div class="filial">ул.Первая, д.75</div>
+        <div class="filial">ул.Вторая, д.3</div>
+        <div class="filial">ул.Третья, д.158</div>
+    </div>
+
+    <!-- Главное окно  -->
+    <div class="main-page">
+        <h1>Запись на прием к врачу</h1>
+        <h3 class="details1">Специальность</h3>
+        <select class="details1">
+            <option>Специальность №1</option>
+            <option>Специальность №2</option>
+            <option>Специальность №3</option>
+            <option>Специальность №4</option>
+        </select>
+        <h3 class="details2">Врач</h3>
+        <select class="details2">
+            <option>Врач №1</option>
+            <option>Врач №2</option>
+            <option>Врач №3</option>
+            <option>Врач №4</option>
+        </select>
+
+        <table id="calendar2">
+            <thead>
+            <tr><td>‹<td colspan="5"><td>›
+            <tr><td>Пн<td>Вт<td>Ср<td>Чт<td>Пт<td>Сб<td>Вс
+            <tbody>
+        </table>
+
+        <p class="time">9:00</p>
+        <p class="time">9:10</p>
+        <p class="time">9:55</p>
+        <p class="time">11:40</p>
+        <p class="time">11:55</p>
+
+        <div>
+            <button  class="button-choice">Записаться</button>
+        </div>
+    </div>
+
+    <script>
+        function Calendar2(id, year, month) {
+            var Dlast = new Date(year,month+1,0).getDate(),
+                D = new Date(year,month,Dlast),
+                DNlast = new Date(D.getFullYear(),D.getMonth(),Dlast).getDay(),
+                DNfirst = new Date(D.getFullYear(),D.getMonth(),1).getDay(),
+                calendar = '<tr>',
+                month=["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+            if (DNfirst != 0) {
+                for(var  i = 1; i < DNfirst; i++) calendar += '<td>';
+            }else{
+                for(var  i = 0; i < 6; i++) calendar += '<td>';
+            }
+            for(var  i = 1; i <= Dlast; i++) {
+                if (i === new Date().getDate() && D.getFullYear() === new Date().getFullYear() && D.getMonth() === new Date().getMonth()) {
+                    calendar += '<td class="today">' + i;
+                }else{
+                    calendar += '<td>' + i;
+                }
+                if (new Date(D.getFullYear(),D.getMonth(),i).getDay() === 0) {
+                    calendar += '<tr>';
+                }
+            }
+            for(var  i = DNlast; i < 7; i++) calendar += '<td>&nbsp;';
+            document.querySelector('#'+id+' tbody').innerHTML = calendar;
+            document.querySelector('#'+id+' thead td:nth-child(2)').innerHTML = month[D.getMonth()] +' '+ D.getFullYear();
+            document.querySelector('#'+id+' thead td:nth-child(2)').dataset.month = D.getMonth();
+            document.querySelector('#'+id+' thead td:nth-child(2)').dataset.year = D.getFullYear();
+            if (document.querySelectorAll('#'+id+' tbody tr').length < 6) {  // чтобы при перелистывании месяцев не "подпрыгивала" вся страница, добавляется ряд пустых клеток. Итог: всегда 6 строк для цифр
+                document.querySelector('#'+id+' tbody').innerHTML += '<tr><td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;';
+            }
+        }
+        Calendar2("calendar2", new Date().getFullYear(), new Date().getMonth());
+        // переключатель минус месяц
+        document.querySelector('#calendar2 thead tr:nth-child(1) td:nth-child(1)').onclick = function() {
+            Calendar2("calendar2", document.querySelector('#calendar2 thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar2 thead td:nth-child(2)').dataset.month)-1);
+        }
+        // переключатель плюс месяц
+        document.querySelector('#calendar2 thead tr:nth-child(1) td:nth-child(3)').onclick = function() {
+            Calendar2("calendar2", document.querySelector('#calendar2 thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar2 thead td:nth-child(2)').dataset.month)+1);
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        setTimeout("document.getElementById('overlay').style.display='block'", 500);
+    </script>
+</body>
+</html>
