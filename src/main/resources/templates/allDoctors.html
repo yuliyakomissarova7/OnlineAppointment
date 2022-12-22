@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Наши врачи</title>
+    <script>
+        function goToAddDoctorPage() {
+            return window.location.href = '/admin/addDoctor';
+        }
+    </script>
+</head>
+<body>
+    <div>Наши врачи</div>
+    <table>
+        <thead>
+        <tr>
+            <th>ФИО врача</th>
+            <th>Специализация</th>
+            <th>Стаж работы</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.name}"></td>
+            <td th:text="${doctor.specialization}"></td>
+            <td th:text="${doctor.experience}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        <button><a th:attr="onclick=|goToAddDoctorPage()|">Добавить нового врача</a></button>
+    </p>
+</body>
+</html>

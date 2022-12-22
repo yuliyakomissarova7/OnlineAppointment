@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление врача</title>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+    <form action="#" th:action="@{/admin/addDoctor}" th:object="${doctor}" method="post">
+        <fieldset>
+            <legend>Добавление врача</legend>
+            <p><label for="name">ФИО <em>* </em></label><input type="text" id="name" name="name" th:field="*{name}" required></p>
+            <p><label for="specialization">Специализация <em>* </em></label><select id="specialization" th:field="*{specialization}" size="1">
+                <option th:each="spec : ${specializations}" th:text="${spec}" th:value="${spec}"></option>
+            </select></p>
+            <p><label for="experience">Стаж <em>* </em></label><input type="text" id="experience" th:field="*{experience}" required></p>
+            <p><label for="description">Подробнее о докторе </label><input type="text" id="description" th:field="*{description}"></p>
+            <p><label ></label></p>
+            <label for="image">Фото </label><input type="file" id="image" name="image">
+        </fieldset>
+        <p><input type="submit" value="Добавить"></p>
+    </form>
+</body>

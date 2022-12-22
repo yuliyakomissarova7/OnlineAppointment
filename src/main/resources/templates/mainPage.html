@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на прием</title>
+    <script>
+        function goToAddDoctorPage() {
+            return window.location.href = '/admin/addDoctor';
+        }
+    </script>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <form>
+        <fieldset>
+            <legend><h2>Наши доктора</h2></legend>
+<!--            <form id="form_1" th:action="@{/}" th:method="post">-->
+<!--                <p><label for="spec">Выберите специализацию врача: </label><select id="spec">-->
+<!--                    <option th:each="spec : ${specializations}" th:text="${spec}" th:value="${spec}" th:object="${spec}" name="spec"></option>-->
+<!--                </select>-->
+<!--                    <button type="submit">Выбрать</button></p>-->
+<!--            </form>-->
+            <div th:each="doctor : ${doctors}">
+                <form>
+                <p><label for="lin">* </label><a id="lin" th:href="@{/doctors/{doctorId}(doctorId=${doctor.id})}" th:text="${doctor.name}"></a>
+                <label for="butt"><button sec:authorize="hasRole('ROLE_Admin')" type="submit"><a id="butt" th:href="@{/admin/doctors/{doctorId}/addDateTime(doctorId=${doctor.id})}">Добавить время приема</a></button></label></p>
+                </form>
+            </div>
+        </fieldset>
+        <p>
+            <button sec:authorize="hasRole('ROLE_Admin')"><a th:attr="onclick=|goToAddDoctorPage()|">Добавить нового врача</a></button>
+        </p>
+    </form>
+
+</body>
+</html>

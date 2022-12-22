@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
+
+<body>
+<header th:fragment="header">
+    <section id="name">
+        <h2>Клиника "Здоровье"</h2>
+    </section>
+    <section sec:authorize="hasRole('ROLE_User')" id="lk">
+        <a th:href="@{/user/lk}">Личный кабинет</a>
+    </section>
+    <section>
+        <a th:href="@{/}">Наши врачи</a>
+    </section>
+    <section id="profile">
+        <a th:href="@{/logout}">Выход</a>
+    </section>
+</header>
+</body>
+</html>

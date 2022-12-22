@@ -1,0 +1,21 @@
+
+/*region header*/
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#name{
+    display: flex;
+    align-items: center;
+}
+
+#profile{
+    margin-right: 20px;
+}
+
+#lk{
+    margin-left: 320px;
+}
+/*endregion*/

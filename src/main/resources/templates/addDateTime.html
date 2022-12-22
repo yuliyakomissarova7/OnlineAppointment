@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление времени</title>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+  <form th:action="@{/doctors/{doctorId}(doctorId=${doctor.id})}">
+      <fieldset>
+          <legend><h2 th:text="${doctor.name}"></h2></legend>
+          <p><label for="date">Дата: </label><input id="date" type="date" name="date" value="2022-12-22"></p>
+          <p><label for="time">Время: </label><select id="time" name="time" size="12" multiple th:width="300">
+              <option th:each="time : ${times}" th:text="${time.getTime()}+':00'" th:value="${time.getTime()}"></option>
+          </select></p>
+      </fieldset>
+      <p><button >Добавить</button></p>
+  </form>
+</body>
+</html>

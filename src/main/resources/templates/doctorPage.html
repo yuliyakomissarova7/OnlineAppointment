@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${doctor.name}"></title>
+    <script>
+        function goToLk(){
+            window.location.href = '/user/lk';
+        }
+    </script>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <form th:action="@{/user/lk}" method="post">
+        <fieldset>
+            <legend><h2 th:text="${doctor.name}"></h2></legend>
+            <p><label for="spec">Специализация: </label><span id="spec" th:text="${doctor.specialization}"></span></p>
+            <p><label for="exp">Опыт работы: </label><span id="exp" th:text="${doctor.experience}"></span></p>
+            <p><label for="desk">Образование: </label><span id="desk" th:text="${doctor.description}"></span></p>
+            <p><form th:action="@{/doctors/{doctorId}(doctorId=${doctor.id})}" th:method="post"><label for="date">Выберите дату для записи: </label>
+            <input id="date" type="date" name="date" value="2022-12-22"><span>  </span><button type="submit">Выбрать</button></form></p>
+            <p><label for="time">Выберите время для записи: </label><select name="time" id="time">
+                <option th:each="time : ${times}" th:text="${time.getTime()}+':00'" th:value="${time.getTime()}"></option>
+            </select>
+        </fieldset>
+        <p><button sec:authorize="hasRole('ROLE_User')" type="submit"><a th:href="@{/user/lk}">Записаться</a></button></p>
+    </form>
+</body>
+</html>

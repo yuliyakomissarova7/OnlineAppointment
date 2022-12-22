@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <script>
+        function goToRegistration(){
+            return window.location.href = `/user/registration`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Вход</h2>
+    <form th:action="@{/login}" method="post" id="login-form">
+        <p th:if="${param.error}" id="error">Неправильные имя и/или пароль</p>
+        <label for="username">Email</label>
+        <input type="email" name="username" id="username" placeholder="Введите email"/>
+        <label for="password">Пароль</label>
+        <input type="password" name="password" id="password" placeholder="Введите пароль"/>
+        <button type="submit">Войти</button>
+    </form>
+    <button><a th:href="@{/registration}">Зарегистрироваться</a></button>
+</body>
+</html>

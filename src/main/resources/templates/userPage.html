@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <script>
+        function goToDoctorPage() {
+            return window.location.href = '/doctors';
+        }
+    </script>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <h2>Личный кабинет</h2>
+    <div th:object="${user}"><h3>Персональные данные:</h3></div>
+    <p><label for="email">Email: </label><span type="text" id="email" name="email" th:text="${user.email}"></span></p>
+    <p><label for="firstname">Имя: </label><span id="firstname" name="firstName" th:text="${user.firstName}"></span></p>
+    <p><label for="secondname">Фамилия: </label><span id="secondname" name="secondName" th:text="${user.secondName}"></span></p>
+    <p><label for="patronymic">Отчество: </label><span id="patronymic" name="patronymic" th:text="${user.patronymic}"></span></p>
+
+
+    <p><div><h3>Мои записи:</h3></div>
+    <div th:each="appointment : ${appointments}">
+        <p><label>* </label><span th:text="${appointment.date}">   </span><span th:text="${appointment.time}"></span></p>
+        <p><label>   </label><span th:text="${appointment.doctor}"></span></p>
+    </div>
+
+</body>
+</html>
